@@ -20,8 +20,7 @@ empty_point = empty_dot
 
 with open("/sys/class/power_supply/BAT0/capacity", 'r') as f:
     """ Reads data from battery driver file."""
-    read_charge = f.read()
-    charge = int(read_charge)
+    charge = int(f.read())
 
 
 for point in range(max_points):
