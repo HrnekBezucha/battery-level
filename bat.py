@@ -1,19 +1,28 @@
 #!/usr/bin/python3
+"""
+    Utility for Linux systems which takes battery charge from
+    BAT0 and displays a number of hearts or dots.
+    To be used by tmux or conky.
+"""
 
-# get number from /sys/class/power_supply/BAT0/capacity
-
-charge = 90                 # example value
 max_points = 5
 point_value = 20            # full charge / max_points
 points = []
 
 full_heart = "♥"
-empty_heart = "♡"           # double-width.. *sigh*
-full_dot = "•"              # dots may be better
+empty_heart = "♡"           # double-width symbol.. *sigh*
+full_dot = "•"
 empty_dot = "○"
 
 full_point = full_dot       # choose symbol hearts or dots
 empty_point = empty_dot
+
+
+with open("/sys/class/power_supply/BAT0/capacity", 'r') as f:
+    """ Reads data from battery driver file."""
+    read_charge = f.read()
+    charge = int(read_charge)
+
 
 for point in range(max_points):
     """Prints full point if divisible by point_value
