@@ -2,7 +2,7 @@
 
 # get number from /sys/class/power_supply/BAT0/capacity
 
-charge = 95                 # example value
+charge = 90                 # example value
 max_points = 5
 point_value = 20            # full charge / max_points
 points = []
@@ -18,7 +18,10 @@ empty_point = empty_dot
 for point in range(max_points):
     """Prints full point if divisible by point_value
         or empty if not."""
-    if charge // point_value:
+#   no reason to print when full charge
+    if charge > 95:
+        break
+    elif charge // point_value:
         points.append(full_point)
         charge = charge - point_value
     else:
