@@ -6,8 +6,6 @@
 """
 
 max_points = 5
-point_value = 20            # full charge / max_points
-points = []
 charge = 0                  # default value
 
 full_heart = "♥"
@@ -26,22 +24,15 @@ try:
 except FileNotFoundError:
     print("Battery charge not found.")
 
+points = (charge * max_points) // 100
 
-for point in range(max_points):
-    """Prints full point if divisible by point_value
-        or empty if not."""
-#   no reason to print when full charge
-    if charge > 95:
-        break
-    elif charge == 0:
-# when file does not exist
-        break
-    elif charge // point_value:
-        points.append(full_point)
-        charge = charge - point_value
-    else:
-        points.insert(0, empty_point)
-        break
-
-print(*points)
+if charge > 95:
+    pass
+elif charge == 0:
+# default value
+    pass
+else:
+    display = full_point * points + empty_point * (max_points - points)
+    print(display)
+    #print(full_point * points + empty_point * (max_points - points))
 
